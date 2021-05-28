@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private navegacion: Router,
   ) {
-    this.OnnSesion = true;
+    this.OnnSesion = false;
 
   }
 

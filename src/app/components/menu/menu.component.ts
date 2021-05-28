@@ -9,7 +9,7 @@ export class MenuComponent implements OnInit {
   public VerMenu:boolean=false;
   public NombreUsuario:string = "";
   public FotoPerfil:string="";
-  public EsMedico:boolean = false;
+  public EsMedico:boolean = true;
   constructor(
   
   ) 
@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("Si entro")
   }
   ExpandirMenu() {
     let tipo: any = document.getElementById('sidemenu');

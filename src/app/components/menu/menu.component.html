@@ -16,20 +16,19 @@
             <div id="title">
                 <span>Menú principal</span>
             </div>
-            
-                <div  alt="Menú" title="Desplegar Menú" id="menu-btn" (click)="ExpandirMenu()">
-                    <div class="btn-hamburger"></div>
-                    <div class="btn-hamburger"></div>
-                    <div class="btn-hamburger"></div>
-                </div>
-            
-            
+
+            <div alt="Menú" title="Desplegar Menú" id="menu-btn" (click)="ExpandirMenu()">
+                <div class="btn-hamburger"></div>
+                <div class="btn-hamburger"></div>
+                <div class="btn-hamburger"></div>
+            </div>
+
+
         </div>
         <!-- PROFILE -->
         <div id="profile">
             <div id="photo">
-                <img src= {{FotoPerfil}}
-                    alt="">
+                <img src={{FotoPerfil}} alt="">
             </div>
             <div id="name">
                 <span>{{NombreUsuario}}</span>
@@ -39,9 +38,9 @@
         <div id="menu-items">
             <div class="item separator"></div>
             <div class="item" alt="Home" title="Home">
-                <a href="#">
+                <a href="Home">
                     <div style="float: left" class="icon">
-                        <img  src="https://github.com/romeoaxpuac123/MisImagenes/blob/main/Diabetic/Iconos/Home.png?raw=true" alt="">
+                        <img src="https://github.com/romeoaxpuac123/MisImagenes/blob/main/Diabetic/Iconos/Home.png?raw=true" alt="">
                     </div>
                     <div id="title">
                         <span style="font-size:24px;">Home</span>
@@ -52,7 +51,7 @@
             <div class="item separator"></div>
 
             <div class="item" alt="Mi perfil" title="Mi Perfil">
-                <a href="#">
+                <a href="Perfil">
                     <div style="float: left" class="icon">
                         <img src="https://github.com/romeoaxpuac123/MisImagenes/blob/main/Diabetic/Iconos/Perfil.png?raw=true" alt="">
                     </div>
@@ -101,7 +100,7 @@
                 </a>
             </div>
 
-            <div class="item separator" *ngIf="EsMedico==false" ></div>
+            <div class="item separator" *ngIf="EsMedico==false"></div>
 
             <div class="item" alt="Recomendaciones" title="Recomendaciones del día" *ngIf="EsMedico==false">
                 <a href="#">
