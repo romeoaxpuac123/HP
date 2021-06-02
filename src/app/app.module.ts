@@ -17,6 +17,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { Encabezado2Component } from './components/encabezado2/encabezado2.component';
 import { AlertasComponent } from './components/alertas/alertas.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { MensajesComponent } from './components/mensajes/mensajes.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     MenuComponent,
     Encabezado2Component,
     AlertasComponent,
-    PerfilComponent
+    PerfilComponent,
+    MensajesComponent
   ],
   imports: [
     BrowserModule,

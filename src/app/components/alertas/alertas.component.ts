@@ -189,11 +189,11 @@ export class AlertasComponent implements OnInit {
       background: '#5f6769',
       title: '<a style=\"color:white\">Nuevo mensaje</a>',
       html:
-        '<input  type="text" placeholder="Destinatario" style = \'width: 80%; font-family:Verdana;  height: 30px;  \' id="Correo" type="text" name="Correo"  required><br>' +
+        '<input  type="text" placeholder="Destinatario" style = \'width: 100%; font-family:Verdana;  height: 50px;  \' id="Correo" type="text" name="Correo"  required><br>' +
 
-        '<input  type="text" placeholder="Asunto" style = \'width: 80%; font-family:Verdana;  height: 30px;  \' id="Asunto" type="text" name="Asunto"  required><br>' +
+        '<input  type="text" placeholder="Asunto" style = \'width: 100%; font-family:Verdana;  height: 50px;  \' id="Asunto" type="text" name="Asunto"  required><br>' +
 
-        '<textarea style = \'width: 80%; height:150px; font-family:Verdana;   \' id="Mensaje" type="text" name="Mensaje"  required></textarea>'
+        '<textarea style = \'width: 100%; height:200px; font-family:Verdana;   \' id="Mensaje" type="text" name="Mensaje"  required></textarea>'
 
 
       ,
@@ -241,5 +241,20 @@ export class AlertasComponent implements OnInit {
     return false;
 
   }
-
+  Mensaje_Correo(emisor:string,Asunto:string,Fecha:string,Mensaje:string){
+    Swal.fire({
+      background: '#fff no-repeat center url(https://github.com/romeoaxpuac123/MisImagenes/blob/main/Diabetic/Fondoperfil.png?raw=true',
+      title: "<a style=\"color:black\">"+ "Información Mensaje" +"</a>" 
+            + "<br><span>De: " + emisor + "</span>"
+            + "<br><span>Asunto: " + Asunto + "</span>"
+            + "<br><span>Fecha: " + Fecha + "</span>",
+      input: 'textarea',
+       inputValue: Mensaje,
+      inputAttributes: {
+        'disabled':'false',
+      },
+      confirmButtonText: "Aceptar",
+      confirmButtonColor: "black",
+    })  
+  }
 }

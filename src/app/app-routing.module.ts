@@ -6,6 +6,7 @@ import {RegistroComponent} from './components/registro/registro.component';
 import {PortalComponent} from './components/portal/portal.component';
 import {MenuComponent} from './components/menu/menu.component'
 import {PerfilComponent} from './components/perfil/perfil.component'
+import {MensajesComponent} from './components/mensajes/mensajes.component'
 const routes: Routes = [
   {
     path:'',
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path:'Menu',
     component: MenuComponent 
+  },
+  {
+    path:'Mensaje',
+    component: MensajesComponent 
   },
  
   
