@@ -7,6 +7,7 @@ import {PortalComponent} from './components/portal/portal.component';
 import {MenuComponent} from './components/menu/menu.component'
 import {PerfilComponent} from './components/perfil/perfil.component'
 import {MensajesComponent} from './components/mensajes/mensajes.component'
+import {HematologiaComponent} from './components/hematologia/hematologia.component'
 const routes: Routes = [
   {
     path:'',
@@ -29,14 +30,13 @@ const routes: Routes = [
     component: PerfilComponent 
   },
   {
-    path:'Menu',
-    component: MenuComponent 
-  },
-  {
     path:'Mensaje',
     component: MensajesComponent 
   },
- 
+  {
+    path:'Hematologia',
+    component: HematologiaComponent 
+  },
   
 ];
 

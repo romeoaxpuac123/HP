@@ -18,6 +18,7 @@ import { Encabezado2Component } from './components/encabezado2/encabezado2.compo
 import { AlertasComponent } from './components/alertas/alertas.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { MensajesComponent } from './components/mensajes/mensajes.component';
+import { HematologiaComponent } from './components/hematologia/hematologia.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MensajesComponent } from './components/mensajes/mensajes.component';
     Encabezado2Component,
     AlertasComponent,
     PerfilComponent,
-    MensajesComponent
+    MensajesComponent,
+    HematologiaComponent
   ],
   imports: [
     BrowserModule,

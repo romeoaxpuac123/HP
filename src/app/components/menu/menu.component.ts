@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   {
     this.FotoPerfil = "https://i.pinimg.com/736x/2f/5e/4e/2f5e4e12d4cf926cb2fc780dec2d7aae.jpg",
     this.NombreUsuario = "Romeo"
-    this.EsMedico = true;
+    this.EsMedico = false;
   }
 
   ngOnInit(): void {

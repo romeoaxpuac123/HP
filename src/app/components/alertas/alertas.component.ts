@@ -257,4 +257,16 @@ export class AlertasComponent implements OnInit {
       confirmButtonColor: "black",
     })  
   }
+  Mensaje_Hematologia(Nombre:string,Cantidad:string,Fecha:string){
+    Swal.fire({
+      background: '#fff no-repeat center url(https://github.com/romeoaxpuac123/MisImagenes/blob/main/Diabetic/Fondoperfil.png?raw=true',
+      title: "<a style=\"color:black\">"+ "Información Hematologia" +"</a>" 
+            + "<br><span>Hematología: " + Nombre + "</span>"
+            + "<br><span>Total: " + Cantidad + "</span>"
+            + "<br><span>Fecha: " + Fecha + "</span>",
+      
+      confirmButtonText: "Aceptar",
+      confirmButtonColor: "black",
+    })  
+  }
 }
