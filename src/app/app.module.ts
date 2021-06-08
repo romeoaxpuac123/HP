@@ -20,6 +20,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { MensajesComponent } from './components/mensajes/mensajes.component';
 import { HematologiaComponent } from './components/hematologia/hematologia.component';
 import { FichaComponent } from './components/ficha/ficha.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FichaComponent } from './components/ficha/ficha.component';
     PerfilComponent,
     MensajesComponent,
     HematologiaComponent,
-    FichaComponent
+    FichaComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,

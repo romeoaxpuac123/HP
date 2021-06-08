@@ -8,6 +8,7 @@ import {PerfilComponent} from './components/perfil/perfil.component';
 import {MensajesComponent} from './components/mensajes/mensajes.component';
 import {HematologiaComponent} from './components/hematologia/hematologia.component';
 import {FichaComponent} from './components/ficha/ficha.component';
+import {ReportesComponent} from './components/reportes/reportes.component';
 const routes: Routes = [
   {
     path:'',
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path:'Ficha',
     component: FichaComponent 
+  },
+  {
+    path:'Reportes',
+    component: ReportesComponent 
   },
 ];
 
