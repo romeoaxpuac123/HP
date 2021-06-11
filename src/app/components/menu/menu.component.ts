@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import {LocalService} from '../../services/local.service';
+import {AlertasComponent} from '../alertas/alertas.component'
 @Component({
   selector: 'app-menu',
   templateUrl:  './menu.component.html',
@@ -10,8 +11,9 @@ export class MenuComponent implements OnInit {
   public NombreUsuario:string = "";
   public FotoPerfil:string="";
   public EsMedico:boolean = true;
+  public Alamars:AlertasComponent = new AlertasComponent;
   constructor(
-  
+    private Almacenamiento:LocalService,
   ) 
   {
     this.FotoPerfil = "https://i.pinimg.com/736x/2f/5e/4e/2f5e4e12d4cf926cb2fc780dec2d7aae.jpg",
@@ -41,5 +43,8 @@ export class MenuComponent implements OnInit {
       this.VerMenu = false;
     }
   }
-
+  SesionOff(){
+    this.Almacenamiento.LimpiarLS();
+    this.Alamars.Mensaje_De_Confirmacion("Fin de sesión","Gracias por utilizar Hope Diabetic")
+  }
 }

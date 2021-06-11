@@ -34,28 +34,28 @@
             <div id="login">
                 <form id="loginform">
                     <label for="usuario">Correo electrónico</label>
-                    <input id="usuario" type="email" name="usuario" placeholder="Correo" required>
+                    <input [(ngModel)]="Correo" id="usuario" type="email" name="usuario" placeholder="Correo" required>
 
                     <label for="password">Contraseña</label>
-                    <input id="password" type="password" placeholder="Contraseña" name="password" required>
+                    <input [(ngModel)]="Password" id="password" type="password" placeholder="Contraseña" name="password" required>
 
                     <label for="usuario">Tipo Usuario                            
                         </label>
 
                     <div class="wrapper" style="background-color: transparent;">
-                        <input type="radio" name="select" id="option-1" checked>
+                        <input (change)="ChangeMedico()" type="radio" name="select" id="option-1" checked>
                         <label style="border-color:transparent" for="option-1" class="option option-1">
                                 <div class="dot"></div>
                                  <span>Médico</span>
                                  </label>
-                        <input type="radio" name="select" id="option-2">
+                        <input (change)="ChangeUsuario()" type="radio" name="select" id="option-2">
 
                         <label style="border-color:transparent" for="option-2" class="option option-2">
                                 <div class="dot"></div>
                                  <span>Paciente</span>
                               </label>
                     </div>
-                    <button type="submit" title="Ingresar" name="Ingresar">Ingresar</button>
+                    <button (click)="Session()" type="submit" title="Ingresar" name="Ingresar">Ingresar</button>
                 </form>
 
             </div>

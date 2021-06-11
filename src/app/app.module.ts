@@ -21,6 +21,8 @@ import { MensajesComponent } from './components/mensajes/mensajes.component';
 import { HematologiaComponent } from './components/hematologia/hematologia.component';
 import { FichaComponent } from './components/ficha/ficha.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MicroserviciosService} from './services/microservicios.service';
 
 @NgModule({
   declarations: [
@@ -45,9 +47,10 @@ import { ReportesComponent } from './components/reportes/reportes.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [MicroserviciosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
