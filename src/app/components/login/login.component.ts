@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
         
       }else{
         console.log("No sesion-----------");
-        this.Alamars.Mensaje_De_Error("Datos incorrectos","Correo, contraseña o tipo de usuario invalidos");  
+        this.Alamars.Mensaje_De_Error("Datos incorrectos","Correo, contraseña, cuenta o tipo de usuario invalidos");  
       } 
     });
   }
@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
         this.navegacion.navigate(['Home']);
       }else{
         console.log("No sesion-----------");
-        this.Alamars.Mensaje_De_Error("Datos incorrectos","Correo, contraseña o tipo de usuario invalidos");  
+        this.Alamars.Mensaje_De_Error("Datos incorrectos","Correo, contraseña, cuenta o tipo de usuario invalidos");  
       } 
     });
   }

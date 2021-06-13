@@ -35,13 +35,13 @@
             <div id="login">
                 <form id="loginform">
                     <label for="Nombre">Nombre</label>
-                    <input id="Nombre" type="text" name="Nombre" placeholder="Nombre" required>
+                    <input [(ngModel)]="NombreRegistro" id="Nombre" type="text" name="Nombre" placeholder="Nombre" required>
 
                     <label for="Apellido">Apellido</label>
-                    <input id="Apellido" type="text" name="Apellido" placeholder="Apellido" required>
+                    <input [(ngModel)]="ApellidoRegistro" id="Apellido" type="text" name="Apellido" placeholder="Apellido" required>
 
                     <label for="usuario">Correo electrónico</label>
-                    <input id="usuario" type="email" name="usuario" placeholder="Correo" required>
+                    <input [(ngModel)]="CorreoRegistro" id="usuario" type="email" name="usuario" placeholder="Correo" required>
 
                     <div class="campo">
 
@@ -80,15 +80,15 @@
                     <div *ngIf="edited==true">
 
                         <label for="Nacimiento">Fecha de Nacimiento</label>
-                        <input id="Nacimiento" type="date" name="Nacimiento" required>
+                        <input [(ngModel)]="FechaRegistro" id="Nacimiento" type="date" name="Nacimiento" required>
 
                         <label for="Sexo">Sexo</label>
-                        <select name="Sexo" id="Sexo" name="Sexo">
+                        <select [(ngModel)]="sexo" name="Sexo" id="Sexo" name="Sexo">
                                 <option>Masculino</option>                            
                                 <option>Femenino</option>                            
                             </select>
                     </div>
-                    <button type="submit" title="Ingresar" name="Ingresar">Ingresar</button>
+                    <button (click)="Registrar()" type="submit" title="Ingresar" name="Ingresar">Ingresar</button>
                 </form>
 
             </div>
