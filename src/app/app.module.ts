@@ -23,6 +23,7 @@ import { FichaComponent } from './components/ficha/ficha.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MicroserviciosService} from './services/microservicios.service';
+import { ValidarCuentaComponent } from './components/validar-cuenta/validar-cuenta.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MicroserviciosService} from './services/microservicios.service';
     MensajesComponent,
     HematologiaComponent,
     FichaComponent,
-    ReportesComponent
+    ReportesComponent,
+    ValidarCuentaComponent
   ],
   imports: [
     BrowserModule,

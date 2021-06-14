@@ -116,18 +116,18 @@
                 <div id="login">
                     <form id="loginform">
                         <label for="usuario">Tu Nombre</label>
-                        <input id="usuario" type="text" name="usuario" placeholder="Nombre" required>
+                        <input [(ngModel)]="nombre" id="usuario" type="text" name="usuario" placeholder="Nombre" required>
 
                         <label for="asunto">Asunto</label>
-                        <input id="asunto" type="text" name="asunto" placeholder="Asunto" required>
+                        <input [(ngModel)]="asunto" id="asunto" type="text" name="asunto" placeholder="Asunto" required>
 
                         <label for="correo">Correo</label>
-                        <input id="correo" type="email" name="correo" placeholder="ejemplo@correo.com" required>
+                        <input [(ngModel)]="correo" id="correo" type="email" name="correo" placeholder="ejemplo@correo.com" required>
 
                         <label for="Mensaje">Mensaje</label>
-                        <textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
+                        <textarea [(ngModel)]="mensaje" id="w3review" name="w3review" rows="4" cols="50"></textarea>
 
-                        <button type="submit" title="Enviar" name="Enviar">Enviar</button>
+                        <button (click)="Contactanos()" type="submit" title="Enviar" name="Enviar">Enviar</button>
                     </form>
 
                 </div>

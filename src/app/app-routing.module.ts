@@ -9,9 +9,15 @@ import {MensajesComponent} from './components/mensajes/mensajes.component';
 import {HematologiaComponent} from './components/hematologia/hematologia.component';
 import {FichaComponent} from './components/ficha/ficha.component';
 import {ReportesComponent} from './components/reportes/reportes.component';
+import {ValidarCuentaComponent} from './components/validar-cuenta/validar-cuenta.component';
+
 const routes: Routes = [
   {
     path:'',
+    component: PortalComponent
+  }, 
+  {
+    path:'Portal',
     component: PortalComponent
   }, 
   {
@@ -45,6 +51,10 @@ const routes: Routes = [
   {
     path:'Reportes',
     component: ReportesComponent 
+  },
+  {
+    path:'Cuenta/:info',
+    component: ValidarCuentaComponent
   },
 ];
 

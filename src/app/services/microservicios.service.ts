@@ -56,4 +56,43 @@ export class MicroserviciosService {
     })
   }
 
+  ActivarCuenta(correo:string,codigo:string,tipo:string){
+    let urlAPI = 'http://localhost:3003/authCuenta';
+    return this._http.post(urlAPI,{
+      "email": correo,
+      "codigo": codigo,
+      "tipo":tipo
+    })
+  }
+
+  CorreoCuenta(email:string,codigo:string,nombre:string,password:string){
+    let urlAPI = 'http://localhost:3003/Correo';
+    return this._http.post(urlAPI,{
+      "email": email,
+      "codigo": codigo,
+      "nombre":nombre,
+      "password":password,
+    })
+  }
+
+  Contactanos(nombre:string,asunto:string,correo:string){
+    let urlAPI = 'http://localhost:3003/Respuesta';
+    return this._http.post(urlAPI,{
+      "nombre": nombre,
+      "asunto": asunto,
+      "correo":correo,
+    })
+  }
+
+  InfoContacanos(nombre:string,asunto:string,correo:string,mensaje:string){
+    let urlAPI = 'http://localhost:3003/MensajeC';
+    return this._http.post(urlAPI,{
+      "nombre": nombre,
+      "asunto": asunto,
+      "correo":correo,
+      "mensaje":mensaje
+    })
+  }
+
+
 }

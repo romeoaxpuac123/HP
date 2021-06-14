@@ -156,7 +156,9 @@ export class RegistroComponent implements OnInit {
           console.log(this.PerfilDefault);
           let chas = this. ChashItem();
           console.log(chas);
-          
+          this.CorreoConfirmacion(this.CorreoRegistro,
+            "http://localhost:4200/Cuenta/"+this.CorreoRegistro+"&&"+chas+"&&"+"1",this.NombreRegistro,this.PassWord
+            );
           this.RegistrarCliente(
             this.NombreRegistro,this.ApellidoRegistro,this.PassWord,
             this.CorreoRegistro,this.sexo,this.FechaRegistro,this.PerfilDefault,chas
@@ -177,7 +179,10 @@ export class RegistroComponent implements OnInit {
           console.log(this.PassWord);
           let chas = this. ChashItem();
           console.log(chas);
-          this.RegistrarMedico(this.NombreRegistro,this.ApellidoRegistro,this.CorreoRegistro,this.PassWord,chas);
+          this.CorreoConfirmacion(this.CorreoRegistro,
+            "http://localhost:4200/Cuenta/"+this.CorreoRegistro+"&&"+chas+"&&"+"0",this.NombreRegistro,this.PassWord
+            );
+          this.RegistrarMedico(this.NombreRegistro,this.ApellidoRegistro,this.PassWord,this.CorreoRegistro,chas);
         }
 
   
@@ -237,5 +242,11 @@ export class RegistroComponent implements OnInit {
         cadena += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return cadena;
+  }
+
+  CorreoConfirmacion(email:string,codigo:string,nombre:string,password:string) {
+    this.Microservicio.CorreoCuenta(email,codigo,nombre,password).subscribe((resp: any) => {
+  
+    });
   }
 }
