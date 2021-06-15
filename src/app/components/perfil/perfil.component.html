@@ -10,12 +10,12 @@
         <div id="sidemenu">
             <div id="profile">
                 <div id="photo">
-                    <img src="https://i.pinimg.com/474x/34/dc/bc/34dcbc0204c76b419d8ef549d7ec965d.jpg" alt="">
+                    <img src={{foto}} alt="">
                 </div>
                 <div id="name">
-                    <span>Romeo Axpuac</span>
+                    <span>{{Nombre + " " + Apellido}}</span>
                     <br>
-                    <span>@romeoaxpuac123</span>
+                    <span>{{Usuario}}</span>
                     <br><br>
                     <input type="file" name="file" id="file" class="inputfile" />
                     <label for="file">Nueva foto de perfil</label>
@@ -31,25 +31,28 @@
 
                 <div id="name">
                     <span>Nombre:</span>
-                    <input type="text" value="Romeo" />
+                    <input [(ngModel)]="Nombre" type="text" value={{Nombre}} />
                     <br>
                     <span>Apellido:</span>
-                    <input type="text" value="Axpuac" />
+                    <input [(ngModel)]="Apellido" type="text" value={{Apellido}} />
                     <br>
                     <span>Usuario:</span>
-                    <input type="text" value="romeoaxpuac123" />
+                    <input type="text" value={{Usuario}} />
                     <br>
                     <span>Contraseña:</span>
-                    <input type="password" value="Contraseña" />
+                    <input [(ngModel)]="contrasena" type="password" value={{contrasena}} />
                     <br>
                     <span>Correo:</span>
-                    <input type="text" value="soyromeoaxpuac@gmail.com" />
+                    <input [(ngModel)]="correo" type="text" value={{correo}} />
+                    <br *ngIf="Medico==false">
+                    <span *ngIf="Medico==false">Sexo:</span>
+                    <input [(ngModel)]="sexo" *ngIf="Medico==false" type="text" value={{sexo}} />
                     <br>
-                    <span>Nacimiento:</span>
-                    <input type="date" value="2018-07-22">
+                    <span *ngIf="Medico==false">Nacimiento:</span>
+                    <input [(ngModel)]="nacimiento" *ngIf="Medico==false" type="date" value={{nacimiento}}>
 
                 </div>
-                <button id="boton_personalizado">Actualizar Datos</button>
+                <button (click)="Actualizar();" id="boton_personalizado">Actualizar Datos</button>
             </div>
             <br>
         </div>

@@ -36,23 +36,68 @@
             <span>Grupo Sanguineo:</span>
             <input type="text" value="O+" />
             <br>
+
+            <datalist id="itemsMedicina">
+                <option value="Metformina">Metformina</option>
+                <option value="Inyeccion de insulina">Inyección de insulina</option>
+                <option value="Glimepirida">Glimepirida</option>
+                <option value="Tolbutamida">Tolbutamida</option>
+                <option value="Glipizida">Glipizida</option>
+                <option value="Gliburida">Gliburida</option>
+                <option value="Gliburida,micronizada">Gliburida, micronizada</option>
+                <option value="Repaglinida">Repaglinida</option>
+                <option value="Nateglinida">Nateglinida</option>
+                <option value="Acarbosa">Acarbosa</option>
+                <option value="Pioglitazona">Pioglitazona</option>
+                <option value="Rosiglitazona">Rosiglitazona</option>
+                <option value="Liraglutida">Liraglutida</option>
+                <option value="Albiglutida">Albiglutida</option>
+                <option value="Dulaglutida">Dulaglutida</option>
+                <option value="Alogliptina">Alogliptina</option>
+                <option value="Sitagliptina">Sitagliptina</option>
+                <option value="Saxagliptina">Saxagliptina</option>
+                <option value="Linagliptina">Linagliptina</option>
+                <option value="Canagliflozina">Canagliflozina</option>
+                <option value="Dapagliflozina">Dapagliflozina</option>
+                <option value="Empagliflozina">Empagliflozina</option>
+            </datalist>
             <span>Medicamento:</span>
-            <input type="text" value="Medicamento1" />
+            <input type="text" list="itemsMedicina" />
             <br>
             <span>Medicamento:</span>
-            <input type="text" value="Medicamento2" />
+            <input type="text" list="itemsMedicina" />
             <br>
             <span>Medicamento:</span>
-            <input type="text" value="Medicamento3" />
+            <input type="text" list="itemsMedicina" />
+            <br>
+            <span>Medicamento:</span>
+            <input type="text" list="itemsMedicina" />
+            <br>
+            <span>Medicamento:</span>
+            <input type="text" list="itemsMedicina" />
+            <br>
+            <datalist id="itemsIntolerancia">
+                <option value="Alergia al huevo">Alergia al huevo</option>
+                <option value="Alergia al marisco">Alergia al marisco</option>
+                <option value="Alergia al pescado">Alergia al pescado</option>
+                <option value="Alergia a frutos secos">Alergia a frutos secos</option>
+                <option value="Alergia a legumbres">Alergia a legumbres</option>
+                <option value="Alergia a cereales">Alergia a cereales</option>
+                <option value="Alergia a verduras">Alergia a verduras</option>
+                <option value="Alergia a frutas">Alergia a frutas</option>
+                <option value="Gluten">Gluten</option>
+                <option value="Lactosa">Lactosa</option>
+                <option value="Histamina">Histamina</option>
+            </datalist>
+
+            <span>Intolerencia:</span>
+            <input type="text" list="itemsIntolerancia" />
             <br>
             <span>Intolerencia:</span>
-            <input type="text" value="Intolerencia1" />
+            <input type="text" list="itemsIntolerancia" />
             <br>
             <span>Intolerencia:</span>
-            <input type="text" value="Intolerencia2" />
-            <br>
-            <span>Intolerencia:</span>
-            <input type="text" value="Intolerencia3" />
+            <input type="text" list="itemsIntolerancia" />
             <br>
             <span>Cirujias:</span>
             <select name="Cirujias" id="Cirujias">
@@ -60,14 +105,29 @@
                 <option>NO</option>                         
             </select>
             <br>
+            <datalist id="itemsEnfermedades">
+                <option value="Enfermedades respiratorias">Enfermedades respiratorias</option>
+                <option value="Enfermedad celiaca">Enfermedad celíaca</option>
+                <option value="Alteraciones tiroideas">Alteraciones tiroideas</option>
+                <option value="Enfermedades adrenales">Enfermedades adrenales</option>
+                <option value="Problemas en la piel">Problemas en la piel</option>
+                <option value="Hipoglicemia">Hipoglicemia</option>
+                <option value="Hiperglucemia">Hiperglucemia</option>
+                <option value="Daño renal">Daño renal</option>
+                <option value="Enfermedad del corazon">Enfermedad del corazón</option>
+                <option value="Enfermedad en los vasos sanguineos">Enfermedad en los vasos sanguineos</option>
+                <option value="Osteoporosis">Osteoporosis</option>
+                <option value="Retinopatía">Retinopatía</option>
+            </datalist>
+
             <span>Enfermedad:</span>
-            <input type="text" value="Enfermedad1" />
+            <input type="text" list="itemsEnfermedades" />
             <br>
             <span>Enfermedad:</span>
-            <input type="text" value="Enfermedad2" />
+            <input type="text" list="itemsEnfermedades" />
             <br>
             <span>Enfermedad:</span>
-            <input type="text" value="Enfermedad3" />
+            <input type="text" list="itemsEnfermedades" />
             <br>
             <br>
             <button id="boton_personalizado">Actualizar Ficha</button>

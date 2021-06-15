@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.OnnSesion = this.SesionOnn();
-    this.Medico= true;
-    this.Usuario = false;
+
     if (this.OnnSesion == true) {
       this.Alamars.Mensaje_De_Error("Sesión abierta","Para ingresar con otra cuenta, cierre sesión");  
       this.navegacion.navigate(['']);
@@ -97,7 +96,7 @@ export class LoginComponent implements OnInit {
     });
   }
   SesisonDoctor(correo:string, password:string){
-    console.log("Microservicio CLIENTE");
+    console.log("Microservicio Doctor");
     this.Microservicio.SesionMedico(correo,password).subscribe((resp:any)=>{
       if(resp.msg ==true){
         console.log("Iniciar sesion-------------");

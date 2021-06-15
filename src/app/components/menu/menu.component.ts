@@ -16,13 +16,21 @@ export class MenuComponent implements OnInit {
     private Almacenamiento:LocalService,
   ) 
   {
-    this.FotoPerfil = "https://i.pinimg.com/736x/2f/5e/4e/2f5e4e12d4cf926cb2fc780dec2d7aae.jpg",
-    this.NombreUsuario = "Romeo"
-    this.EsMedico = false;
+    
+    
+    
   }
 
   ngOnInit(): void {
-    console.log("Si entro")
+    this.EsMedico = this.TipoDeMenu();
+    var Info = this.Almacenamiento.ObtenerInformacionLS("Usuario");
+    var o = JSON.parse(Info);
+    this.NombreUsuario = o.name;
+    if(this.EsMedico==true){
+      this.FotoPerfil = "https://github.com/romeoaxpuac123/MisImagenes/blob/main/Diabetic/Iconos/Perfil.png?raw=true";
+    }else{
+      this.FotoPerfil = o.Foto;
+    }
   }
   ExpandirMenu() {
     let tipo: any = document.getElementById('sidemenu');
@@ -47,4 +55,15 @@ export class MenuComponent implements OnInit {
     this.Almacenamiento.LimpiarLS();
     this.Alamars.Mensaje_De_Confirmacion("Fin de sesión","Gracias por utilizar Hope Diabetic")
   }
+  TipoDeMenu():boolean{
+    var Info = this.Almacenamiento.ObtenerInformacionLS("Tipo");
+    
+    var o = JSON.parse(Info);
+    if(o.TipoUsuario == 'Medico'){
+        return true;
+    }
+    return false;
+  }
+
+
 }

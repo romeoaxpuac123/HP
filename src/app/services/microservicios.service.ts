@@ -94,5 +94,33 @@ export class MicroserviciosService {
     })
   }
 
+  ActualizarCliente(user:number,Nombre:string,Apellido:string,
+    password:string,email:string,genero:string,FechaNac:string,fotografia:string){
+    let urlAPI = 'http://localhost:3003/UpdateCliente';
+    return this._http.post(urlAPI,{
+      "user": user,
+      "Nombre": Nombre,
+      "Apellido":Apellido,
+      "password":password,
+      "email":email,
+      "genero":genero,
+      "FechaNac":FechaNac,
+      "fotografia":fotografia
+
+    })
+  }
+
+  ActualizarMedico(user:number,Nombre:string,Apellido:string,
+    password:string,email:string){
+    let urlAPI = 'http://localhost:3003/UpdateMedico';
+    return this._http.post(urlAPI,{
+      "User": user,
+      "Nombre": Nombre,
+      "Apellido":Apellido,
+      "password":password,
+      "email":email
+    })
+  }
+
 
 }
