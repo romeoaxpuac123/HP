@@ -11,12 +11,12 @@
             <div id="sidemenu">
                 <div id="profile">
                     <div id="photo">
-                        <img src="https://i.pinimg.com/474x/34/dc/bc/34dcbc0204c76b419d8ef549d7ec965d.jpg" alt="">
+                        <img src={{Foto}} alt="">
                     </div>
                     <div id="name">
-                        <span>Romeo Axpuac</span>
+                        <span>{{Nombre + " " + Apellido}}</span>
                         <br>
-                        <span>@romeoaxpuac123</span>
+                        <span>{{Usuario}}</span>
                         <br><br>
                     </div>
                 </div>
@@ -25,16 +25,16 @@
         </div>
         <div class="Ficha">
             <span>Estatura:</span>
-            <input type="text" value="1.74" />
+            <input [(ngModel)]="Estatura" type="text" value={{Estatura}} />
             <br>
             <span>Peso:</span>
-            <input type="text" value="236" />
+            <input [(ngModel)]="Peso" type="text" value={{Peso}} />
             <br>
             <span>Ultimo Control:</span>
-            <input type="date" value="2018-07-22">
+            <input [(ngModel)]="Ultimo_Control" type="date" value={{Ultimo_Control}}>
             <br>
             <span>Grupo Sanguineo:</span>
-            <input type="text" value="O+" />
+            <input [(ngModel)]="Grupo_Sanguineo" type="text" value={{Grupo_Sanguineo}} />
             <br>
 
             <datalist id="itemsMedicina">
@@ -44,7 +44,7 @@
                 <option value="Tolbutamida">Tolbutamida</option>
                 <option value="Glipizida">Glipizida</option>
                 <option value="Gliburida">Gliburida</option>
-                <option value="Gliburida,micronizada">Gliburida, micronizada</option>
+                <option value="Gliburida, micronizada">Gliburida, micronizada</option>
                 <option value="Repaglinida">Repaglinida</option>
                 <option value="Nateglinida">Nateglinida</option>
                 <option value="Acarbosa">Acarbosa</option>
@@ -62,19 +62,19 @@
                 <option value="Empagliflozina">Empagliflozina</option>
             </datalist>
             <span>Medicamento:</span>
-            <input type="text" list="itemsMedicina" />
+            <input [(ngModel)]="Medicamente1" type="text" list="itemsMedicina" value={{Medicamente1}} />
             <br>
             <span>Medicamento:</span>
-            <input type="text" list="itemsMedicina" />
+            <input [(ngModel)]="Medicamente2" type="text" list="itemsMedicina" value={{Medicamente2}}/>
             <br>
             <span>Medicamento:</span>
-            <input type="text" list="itemsMedicina" />
+            <input [(ngModel)]="Medicamente3" type="text" list="itemsMedicina" value={{Medicamente3}} />
             <br>
             <span>Medicamento:</span>
-            <input type="text" list="itemsMedicina" />
+            <input [(ngModel)]="Medicamente4" type="text" list="itemsMedicina" value={{Medicamente4}}/>
             <br>
             <span>Medicamento:</span>
-            <input type="text" list="itemsMedicina" />
+            <input [(ngModel)]="Medicamente5" type="text" list="itemsMedicina" value={{Medicamente5}}/>
             <br>
             <datalist id="itemsIntolerancia">
                 <option value="Alergia al huevo">Alergia al huevo</option>
@@ -91,20 +91,22 @@
             </datalist>
 
             <span>Intolerencia:</span>
-            <input type="text" list="itemsIntolerancia" />
+            <input [(ngModel)]="Intolerancia1" type="text" list="itemsIntolerancia" value={{Intolerancia1}}/>
             <br>
             <span>Intolerencia:</span>
-            <input type="text" list="itemsIntolerancia" />
+            <input [(ngModel)]="Intolerancia2" type="text" list="itemsIntolerancia" value={{Intolerancia2}}/>
             <br>
             <span>Intolerencia:</span>
-            <input type="text" list="itemsIntolerancia" />
+            <input [(ngModel)]="Intolerancia3" type="text" list="itemsIntolerancia" value={{Intolerancia3}}/>
             <br>
+            <!--
             <span>Cirujias:</span>
-            <select name="Cirujias" id="Cirujias">
-                <option>SI</option>                            
-                <option>NO</option>                         
+            <select [(ngModel)]="CirucijaTexto" name="Cirujias" id="Cirujias">
+                <option >NO</option>                            
+                <option >SI</option>                         
             </select>
             <br>
+            -->
             <datalist id="itemsEnfermedades">
                 <option value="Enfermedades respiratorias">Enfermedades respiratorias</option>
                 <option value="Enfermedad celiaca">Enfermedad celíaca</option>
@@ -121,16 +123,16 @@
             </datalist>
 
             <span>Enfermedad:</span>
-            <input type="text" list="itemsEnfermedades" />
+            <input [(ngModel)]="Enfermedad1" type="text" list="itemsEnfermedades" value={{Enfermedad1}} />
             <br>
             <span>Enfermedad:</span>
-            <input type="text" list="itemsEnfermedades" />
+            <input [(ngModel)]="Enfermedad2" type="text" list="itemsEnfermedades" value={{Enfermedad2}}/>
             <br>
             <span>Enfermedad:</span>
-            <input type="text" list="itemsEnfermedades" />
+            <input [(ngModel)]="Enfermedad3" type="text" list="itemsEnfermedades" value={{Enfermedad3}}/>
             <br>
             <br>
-            <button id="boton_personalizado">Actualizar Ficha</button>
+            <button (click)="ActualizarFicha();" id="boton_personalizado">Registrar o Actualizar Ficha</button>
             <br>
             <br>
         </div>

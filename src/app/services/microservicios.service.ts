@@ -121,6 +121,71 @@ export class MicroserviciosService {
       "email":email
     })
   }
+  //Servicios para ficha medica
+  ObtenerFicha(user:number){
+    let urlAPI = 'http://localhost:3003/ExisteFicha';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": user
+    })
+  }
+  RegistrarFicha(External_ID_Cliente:number,Estatura:number,
+    Ultimo_Control:string,Peso:number,Grupo_Sanguineo:string,
+    Medicamente1:string,Medicamente2:string,Medicamente3:string,
+    Medicamente4:string,Medicamente5:string,Intolerancia1:string,
+    Intolerancia2:string,Intolerancia3:string,Cirujias:number,
+    Enfermedad1:string,Enfermedad2:string,Enfermedad3:string
+    ){
+    let urlAPI = 'http://localhost:3003/regisFicha';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente,
+      "Estatura":Estatura,
+      "Ultimo_Control":Ultimo_Control,
+      "Peso":Peso,
+      "Grupo_Sanguineo":Grupo_Sanguineo,
+      "Medicamente1":Medicamente1,
+      "Medicamente2":Medicamente2,
+      "Medicamente3":Medicamente3,
+      "Medicamente4":Medicamente4,
+      "Medicamente5":Medicamente5,
+      "Intolerancia1":Intolerancia1,
+      "Intolerancia2":Intolerancia2,
+      "Intolerancia3":Intolerancia3,
+      "Cirujias":Cirujias,
+      "Enfermedad1":Enfermedad1,
+      "Enfermedad2":Enfermedad2,
+      "Enfermedad3":Enfermedad3
+    })
+  }
+
+  ActualizarFicha(External_ID_Ficha:number,External_ID_Cliente:number,Estatura:number,
+    Ultimo_Control:string,Peso:number,Grupo_Sanguineo:string,
+    Medicamente1:string,Medicamente2:string,Medicamente3:string,
+    Medicamente4:string,Medicamente5:string,Intolerancia1:string,
+    Intolerancia2:string,Intolerancia3:string,Cirujias:number,
+    Enfermedad1:string,Enfermedad2:string,Enfermedad3:string
+    ){
+    let urlAPI = 'http://localhost:3003/UpdateFicha';
+    return this._http.post(urlAPI,{
+      "External_ID_Ficha":External_ID_Ficha,
+      "External_ID_Cliente": External_ID_Cliente,
+      "Estatura":Estatura,
+      "Ultimo_Control":Ultimo_Control,
+      "Peso":Peso,
+      "Grupo_Sanguineo":Grupo_Sanguineo,
+      "Medicamente1":Medicamente1,
+      "Medicamente2":Medicamente2,
+      "Medicamente3":Medicamente3,
+      "Medicamente4":Medicamente4,
+      "Medicamente5":Medicamente5,
+      "Intolerancia1":Intolerancia1,
+      "Intolerancia2":Intolerancia2,
+      "Intolerancia3":Intolerancia3,
+      "Cirujias":Cirujias,
+      "Enfermedad1":Enfermedad1,
+      "Enfermedad2":Enfermedad2,
+      "Enfermedad3":Enfermedad3
+    })
+  }
 
 
 }
