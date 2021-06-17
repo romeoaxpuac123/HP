@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
+
+
 @Component({
   selector: 'app-alertas',
   templateUrl: './alertas.component.html',
@@ -27,7 +29,9 @@ export class AlertasComponent implements OnInit {
 
   public timerInterval: any;
   public b: any;
-  constructor() { }
+  constructor(
+ 
+  ) { }
 
   ngOnInit(): void {
   }
@@ -216,6 +220,12 @@ export class AlertasComponent implements OnInit {
         if (this.Destinatario == "" || this.Asunto == "" || this.Mensaje == "") {
           this.Mensaje_De_Error("Datos incorrectos", "Los campos o datos a ingresar\n no cumplen con lo solicitado.\nINTENTELO DE NUEVO")
         } else {
+          /*
+          if(this.EsMedico() == true){
+
+          }else{
+
+          }*/
           this.Mensaje_De_Confirmacion('Mensaje enviado', 'El mensaje ha sido enviado correctamente');
           console.log("Acá guardamos los datos");
         }
@@ -247,7 +257,7 @@ export class AlertasComponent implements OnInit {
       title: "<a style=\"color:black\">"+ "Información Mensaje" +"</a>" 
             + "<br><span>De: " + emisor + "</span>"
             + "<br><span>Asunto: " + Asunto + "</span>"
-            + "<br><span>Fecha: " + Fecha + "</span>",
+            + "<br><span>Correo: " + Fecha + "</span>",
       input: 'textarea',
        inputValue: Mensaje,
       inputAttributes: {
@@ -269,4 +279,17 @@ export class AlertasComponent implements OnInit {
       confirmButtonColor: "black",
     })  
   }
+  //Metodos para el envio de mensajes
+  /*
+  EsMedico(): boolean {
+    var Info = this.Almacenamiento.ObtenerInformacionLS("Tipo");
+
+    var o = JSON.parse(Info);
+    if (o.TipoUsuario == 'Medico') {
+      return true;
+    }
+    return false;
+  }
+  */
+
 }

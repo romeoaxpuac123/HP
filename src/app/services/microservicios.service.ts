@@ -187,5 +187,50 @@ export class MicroserviciosService {
     })
   }
 
+  ExisteMedico(email:string){
+    let urlAPI = 'http://localhost:6003/CorreoMedico';
+    return this._http.post(urlAPI,{
+      "email": email
+    })
+  }
+  ExisteCliente(email:string){
+    let urlAPI = 'http://localhost:6003/CorreoCliente';
+    return this._http.post(urlAPI,{
+      "email": email
+    })
+  }
+  ExisteAsignacionMedica(External_ID_Cliente:number,External_ID_Medico:number){
+    let urlAPI = 'http://localhost:6003/ExisteAsignacionMedica';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente,
+      "External_ID_Medico":External_ID_Medico
+    })
+  }
+  AsignacionMedica(External_ID_Cliente:number,External_ID_Medico:number){
+    let urlAPI = 'http://localhost:6003/AsignacionMedica';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente,
+      "External_ID_Medico":External_ID_Medico
+    })
+  }
+  GuardarMensaje(Internal_ID_Asignacion:number,Mensaje:string,Emisor:string,EmailEmisor:string,EmailReceptor:string,Asunto:string){
+    let urlAPI = 'http://localhost:6003/AgregarMensaje';
+    return this._http.post(urlAPI,{
+      "Internal_ID_Asignacion": Internal_ID_Asignacion,
+      "Mensaje":Mensaje,
+      "Emisor":Emisor,
+      "EmailEmisor": EmailEmisor,
+      "EmailReceptor":EmailReceptor,
+      "Asunto":Asunto
+
+    })
+  }
+  Mensajes(Email:string){
+    let urlAPI = 'http://localhost:6003/MostrarMensajes';
+    return this._http.post(urlAPI,{
+      "Email": Email
+    })
+  }
+
 
 }
