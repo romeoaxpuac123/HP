@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertasComponent } from '../alertas/alertas.component';
 import { MicroserviciosService } from '../../services/microservicios.service';
 import { LocalService } from '../../services/local.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-mensajes',
   templateUrl: './mensajes.component.html',
   styleUrls: ['./mensajes.component.css']
 })
-export class MensajesComponent implements OnInit {
+export class MensajesComponent implements OnInit, OnDestroy {
 
   public Alamars: AlertasComponent = new AlertasComponent;
   public Pagina: number = 1;
@@ -25,24 +27,42 @@ export class MensajesComponent implements OnInit {
   public Emisor: string = "";
   public EmailEmisor: string = "";
   public EmailEmisor2: string = "";
-
+  public subscription : Subscription = new Subscription();
+  
   constructor(
     private Microservicio: MicroserviciosService,
     private Almacenamiento: LocalService,
     private navegacion: Router,
-
+    //public suscripcion:Subscription,
   ) {
  
   }
 
+  ngOnDestroy():void{
+      this.subscription.unsubscribe();
+      console.log("Observable cerrado");
+  }
   ngOnInit(): void {
+    console.log("ssshola");
     this.OnnSesion = this.SesionOnn();
     if (this.OnnSesion == false) {
       this.Alamars.Mensaje_De_Error("Usuario sin permisos", "Para hacer uso de esta función inice sesión");
       this.navegacion.navigate(['']);
     }else{
+      console.log("Entro")
       this.ActualizarMensajes();
+      
+      console.log("Entor x2")
+      this.subscription = this.Microservicio.refresh$.subscribe(()=>{
+        console.log("Entro x3")
+        this.ActualizarMensajes();
+        console.log("Entro x4")
+        console.log(this.Mensajes);
+        console.log("finxd");
+      })  
+      
     }
+    
   }
 
   mensajeCorto(texto: string): string {
@@ -153,7 +173,7 @@ export class MensajesComponent implements OnInit {
                     this.Microservicio.GuardarMensaje(this.Internal_ID_Asignacion, this.MensajeAEnviar, this.Emisor, this.EmailEmisor, this.Destinatario, this.AsuntoMensaje).subscribe((resp4: any) => {
                       if (resp4.msg == true) {
                         
-                        this.Alamars.Mensaje_De_Confirmacion('Mensaje enviado', 'El mensaje ha sido enviado correctamente, te recomendamos actualizar esta pagina');
+                       this.Alamars.Mensaje_De_Confirmacion('Mensaje enviado', 'El mensaje ha sido enviado correctamente, te recomendamos actualizar esta pagina');
                         
                       } else {
                         this.Alamars.Mensaje_De_Error("ERROR", "Error en el servidor, disculpe las molestias");
@@ -278,6 +298,7 @@ export class MensajesComponent implements OnInit {
   }
   ActualizarMensajes(){
     console.log("MEEEEEEEENSAJE");
+    this.Mensajes = [];
     var Info = this.Almacenamiento.ObtenerInformacionLS("Usuario");
     var o = JSON.parse(Info);
     this.EmailEmisor2 = o.email;

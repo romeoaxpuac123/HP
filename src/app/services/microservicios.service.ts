@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
+import {tap} from 'rxjs/operators';
 //import 'rxjs/add/operator/map';
 @Injectable({
   providedIn: 'root'
 })
 export class MicroserviciosService {
-
+  private _refresh$ = new Subject<void>();
   constructor(
     private _http:HttpClient, 
   ){ 
 
   }
-
+  get refresh$(){
+    return this._refresh$;
+  }
   SesionCliente(correo:string,password:string){
     
     let urlAPI = 'http://localhost:3003/authCliente';
@@ -213,7 +217,8 @@ export class MicroserviciosService {
       "External_ID_Medico":External_ID_Medico
     })
   }
-  GuardarMensaje(Internal_ID_Asignacion:number,Mensaje:string,Emisor:string,EmailEmisor:string,EmailReceptor:string,Asunto:string){
+  GuardarMensaje(Internal_ID_Asignacion:number,Mensaje:string,Emisor:string,EmailEmisor:string,EmailReceptor:string,Asunto:string)
+  :Observable<any>{
     let urlAPI = 'http://localhost:6003/AgregarMensaje';
     return this._http.post(urlAPI,{
       "Internal_ID_Asignacion": Internal_ID_Asignacion,
@@ -223,7 +228,11 @@ export class MicroserviciosService {
       "EmailReceptor":EmailReceptor,
       "Asunto":Asunto
 
-    })
+    }).pipe(
+      tap(()=>{
+        this._refresh$.next();
+      })
+    )
   }
   Mensajes(Email:string){
     let urlAPI = 'http://localhost:6003/MostrarMensajes';
