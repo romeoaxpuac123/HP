@@ -1,16 +1,21 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
-import {AlertasComponent} from '../alertas/alertas.component';
+import { AlertasComponent } from '../alertas/alertas.component';
 import Swal from 'sweetalert2';
+import { MicroserviciosService } from '../../services/microservicios.service';
+import { LocalService } from '../../services/local.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-hematologia',
   templateUrl: './hematologia.component.html',
   styleUrls: ['./hematologia.component.css']
 })
 export class HematologiaComponent implements OnInit {
-  public Alamars:AlertasComponent = new AlertasComponent;
-  public Pagina:number = 1;
-  public Hematologias:any = [];
-  public TipoHemalogias:any = [];
+  public Alamars: AlertasComponent = new AlertasComponent;
+  public subscription: Subscription = new Subscription();
+  public Pagina: number = 1;
+  public Hematologias: any = [];
+  public TipoHemalogias: any = [];
   //REGISTRAR HEMATOLOGIA
   public Cantidad: any;
   public Tipo: any;
@@ -18,143 +23,100 @@ export class HematologiaComponent implements OnInit {
   public Unidad: any;
   public minusculas = "abcdefghyjklmnñopqrstuvwxyz";
   public mayusculas = "ABCDEFGHYJKLMNÑOPQRSTUVWXYZ";
-  public simbolos = "¿@#$%&/()=?¡!*+-\\:;,|°\"\'^[]{}´"
-  constructor() {
-    this.Hematologias = [
-      {
-        "Nombre": "Glucosa1",
-        "Cantidad": "Cantidad1",
-        "Unidad": "Unidad1",
-        "Fecha": "12/12/2021"
-      },
-      {
-        "Nombre": "Glucosa2",
-        "Cantidad": "Cantidad2",
-        "Unidad": "Unidad2",
-        "Fecha": "12/12/2022"
-      },
-      {
-        "Nombre": "Glucosa3",
-        "Cantidad": "Cantidad3",
-        "Unidad": "Unidad3",
-        "Fecha": "12/12/2023"
-      },
-      {
-        "Nombre": "Glucosa4",
-        "Cantidad": "Cantidad4",
-        "Unidad": "Unidad4",
-        "Fecha": "12/12/2024"
-      },
-      {
-        "Nombre": "Glucosa5",
-        "Cantidad": "Cantidad5",
-        "Unidad": "Unidad5",
-        "Fecha": "12/12/2025"
-      },
-      {
-        "Nombre": "Glucosa6",
-        "Cantidad": "Cantidad6",
-        "Unidad": "Unidad6",
-        "Fecha": "12/12/2026"
-      },
-      {
-        "Nombre": "Glucosa7",
-        "Cantidad": "Cantidad7",
-        "Unidad": "Unidad7",
-        "Fecha": "12/12/2027"
-      },
-      {
-        "Nombre": "Glucosa8",
-        "Cantidad": "Cantidad8",
-        "Unidad": "Unidad8",
-        "Fecha": "12/12/2028"
-      },
-      {
-        "Nombre": "Glucosa9",
-        "Cantidad": "Cantidad9",
-        "Unidad": "Unidad9",
-        "Fecha": "12/12/2029"
-      },
-      {
-        "Nombre": "Glucosa10",
-        "Cantidad": "Cantidad10",
-        "Unidad": "Unidad10",
-        "Fecha": "12/12/20210"
-      },
-      {
-        "Nombre": "Glucosa11",
-        "Cantidad": "Cantidad11",
-        "Unidad": "Unidad11",
-        "Fecha": "12/12/20211"
-      },
-    ];
-    this.TipoHemalogias = [
-      {
-       "Nombre": "Glucosa"
-      },
-      {
-        "Nombre": "Colesterol"
-      }
-    ];
-   }
+  public simbolos = "¿@#$%&/()=?¡!*+-\\:;,|°\"\'^[]{}´";
+  public codigoHematologia: number = 0;
+  public MaximoHematologia: number = 0;
+  public CodigoUsuario: number = 0;
+  public OnnSesion: boolean = false;
+  public EsMedicoA: boolean = false;
+  public CodigoUsuarioH: number = 0;
+  public HematologiABuscar: string = "";
+  public FechaInicio:string = "";
+  public FechaFinal:string = "";
+  constructor(
+    private Microservicio: MicroserviciosService,
+    private Almacenamiento: LocalService,
+    private navegacion: Router,
+  ) {
+
+   
+  }
 
   ngOnInit(): void {
+    this.OnnSesion = this.SesionOnn();
+    if (this.OnnSesion == false) {
+      this.Alamars.Mensaje_De_Error("Usuario sin permisos", "Para hacer uso de esta función inice sesión");
+      this.navegacion.navigate(['']);
+    } else {
+      if (this.EsMedico() == true) {
+        this.Alamars.Mensaje_De_Error("Usuario sin permisos", "Para hacer uso de esta función inice sesión");
+        this.navegacion.navigate(['']);
+      } else {
+        //Metodo para ver todas tus hematologias
+        this.ActualizarHematologias();
+        this. ObtenerNombreHematologias();
+        this.subscription = this.Microservicio.refresh2$.subscribe(()=>{
+          
+          this.ActualizarHematologias();
+        }) 
+      }
+    }
   }
 
-  mensajeCorto(texto:string):string{
-    if(texto.length>20){
-      let salida:string = "";
-      for(let i = 0; i < 20; i++){
-        salida = salida + texto[i]; 
+  mensajeCorto(texto: string): string {
+    if (texto.length > 20) {
+      let salida: string = "";
+      for (let i = 0; i < 20; i++) {
+        salida = salida + texto[i];
       }
       return salida;
     }
     return texto;
   }
-  mensajeCorto2(texto:string):string{
-    if(texto.length>20){
-      let salida:string = "";
-      for(let i = 0; i < 20; i++){
-        salida = salida + texto[i]; 
+  mensajeCorto2(texto: string): string {
+    if (texto.length > 20) {
+      let salida: string = "";
+      for (let i = 0; i < 20; i++) {
+        salida = salida + texto[i];
       }
       return salida;
     }
     return texto;
   }
-  mostrarMensaje(Nombre:string,Cantidad:string,Unidad:string,Fecha:string){
-    this.Alamars.Mensaje_Hematologia(Nombre,Cantidad+" "+ Unidad,Fecha);
+  mostrarMensaje(Nombre: string, Cantidad: string, Unidad: string, Fecha: string) {
+    this.Alamars.Mensaje_Hematologia(Nombre, Cantidad + " " + Unidad, Fecha);
   }
-  aumentarPagina(){
+  aumentarPagina() {
     let Anterior: any = document.getElementById('Anterior');
     let Siguiente: any = document.getElementById('Siguiente');
     Anterior.disabled = false;
-    this.Pagina +=1;
-    if(this.Pagina==1){
+    this.Pagina += 1;
+    if (this.Pagina == 1) {
       Anterior.disabled = true;
     }
-    if(this.Hematologias.length <= 5){
-      this.Pagina=1;
+    if (this.Hematologias.length <= 5) {
+      this.Pagina = 1;
       Siguiente.disabled = true;
     }
-    if(this.Pagina*5>=this.Hematologias.length){
+    if (this.Pagina * 5 >= this.Hematologias.length) {
       Siguiente.disabled = true;
-    }else{
+    } else {
       Siguiente.disabled = false;
     }
-    
+
   }
-  disminuirPagina(){
+  disminuirPagina() {
     let Anterior: any = document.getElementById('Anterior');
     let Siguiente: any = document.getElementById('Siguiente');
-    if(this.Pagina==1){
+    if (this.Pagina == 1) {
       Anterior.disabled = true;
-    }else{
-      this.Pagina -=1;
+    } else {
+      this.Pagina -= 1;
       Siguiente.disabled = false;
     }
-    
+
   }
-  EnviarHematologia(){
+  EnviarHematologia() {
     //this.Alamars.Formulario_Hematologia();
     this.Fecha = "Vacio";
     this.Unidad = "Vacio";
@@ -211,35 +173,45 @@ export class HematologiaComponent implements OnInit {
         console.log("Fecha:" + this.Fecha + ".")
         console.log("wau")
         console.log(JSON.stringify(this.Cantidad));
-        var TipoDatoX:Boolean = true;
+        var TipoDatoX: Boolean = true;
         if (this.tieneLetras(this.Cantidad) == true || this.Cantidad == "" || this.Fecha == "" || this.Unidad == "" || this.Tipo == "") {
           this.Alamars.Mensaje_De_Error("Datos incorrectos", "Los campos o datos a ingresar\n no cumplen con lo solicitado.\nINTENTELO DE NUEVO")
         } else {
-          if(this.Tipo == 'ASAT-TGO' || this.Tipo  == 'ALAT-TGP'){
+          if (this.Tipo == 'ASAT-TGO' || this.Tipo == 'ALAT-TGP') {
             console.log("ASSST")
-            if(this.Unidad != 'UI/L'){
+            if (this.Unidad != 'UI/L') {
               TipoDatoX = false;
-              this.Alamars.Mensaje_De_Error("Datos incorrectos", "La hematología "+ this.Tipo +" utiliza UI/L como unidad\nINTENTELO DE NUEVO");
+              this.Alamars.Mensaje_De_Error("Datos incorrectos", "La hematología " + this.Tipo + " utiliza UI/L como unidad\nINTENTELO DE NUEVO");
             }
-          }else if(this.Tipo == 'HEMOGLOBINA GLICOSILADA'){
+          } else if (this.Tipo == 'HEMOGLOBINA GLICOSILADA') {
             console.log("Hemoglovina")
-            if(this.Unidad != '%'){
+            if (this.Unidad != '%') {
               TipoDatoX = false;
-              this.Alamars.Mensaje_De_Error("Datos incorrectos", "La hematología "+ this.Tipo+" utiliza % como unidad\nINTENTELO DE NUEVO");
+              this.Alamars.Mensaje_De_Error("Datos incorrectos", "La hematología " + this.Tipo + " utiliza % como unidad\nINTENTELO DE NUEVO");
             }
-          }else{
+          } else {
             console.log("otroooooooo");
-            if(this.Unidad != 'mg/dl'){
+            if (this.Unidad != 'mg/dl') {
               TipoDatoX = false;
-              this.Alamars.Mensaje_De_Error("Datos incorrectos", "La hematología "+ this.Tipo +" utiliza mg/ld como unidad\nINTENTELO DE NUEVO");
+              this.Alamars.Mensaje_De_Error("Datos incorrectos", "La hematología " + this.Tipo + " utiliza mg/ld como unidad\nINTENTELO DE NUEVO");
             }
           }
-          if(TipoDatoX == true){
-             this.Mensaje_Estas_Seguro("Datos registrados", "Sus datos fueron almacenados correctamente",
-            "Revisar Datos", "Al dar Afirmar sus datos serán almacenados y no podrá modificarlos.");
-          
+          if (TipoDatoX == true) {
+            this.Microservicio.IdHematologa(this.Tipo).subscribe((resp: any) => {
+              if (resp.msg == true) {
+                this.codigoHematologia = resp.info[0].Internal_ID_Hematologia;
+                this.MaximoHematologia = resp.info[0].Maximo;
+                this.Mensaje_Estas_Seguro("Datos registrados", "Sus datos fueron almacenados correctamente",
+                  "Revisar Datos", "Al dar Afirmar sus datos serán almacenados y no podrá modificarlos.");
+              } else {
+                this.Alamars.Mensaje_De_Error("Datos incorrectos", "La hematología " + this.Tipo + " no existe en nuestro sistema");
+
+              }
+            });
+
+
           }
-         
+
         }
       }
     })
@@ -286,9 +258,186 @@ export class HematologiaComponent implements OnInit {
           confirmButtonText: "Aceptar",
           confirmButtonColor: "black",
         });
-        console.log("ACÁ VA EL CODIGO BUENO");
+        console.log("ACÁ VA EL CODIGO BUENO->" + this.MaximoHematologia);
+        console.log("ACÁ VA EL CODIGO BUENO->" + this.codigoHematologia);
+        var Info = this.Almacenamiento.ObtenerInformacionLS("Usuario");
+        var o = JSON.parse(Info);
+        this.CodigoUsuario = o.user
+        console.log("ACÁ VA EL CODIGO BUENO->" + this.CodigoUsuario);
+        console.log("ACÁ VA EL CODIGO BUENO->" + this.Cantidad);
+        console.log("ACÁ VA EL CODIGO BUENO->" + this.Fecha);
+        this.Microservicio.RegistrarHematologa(this.codigoHematologia, this.CodigoUsuario, this.Cantidad, this.Fecha).subscribe((resp: any) => {
+          if (resp.msg == false) {
+            this.Alamars.Mensaje_De_Error("Datos incorrectos", "La hematología " + this.Tipo + " no pudo ser registrada, intentelo de nuevo");
+
+          }
+        });
       }
 
     })
+  }
+
+  SesionOnn(): boolean {
+    var Info = this.Almacenamiento.ObtenerInformacionLS("Usuario");
+    console.log("hooooooooooolaXD");
+    console.log("-" + Info + "-")
+    var o = JSON.parse(Info);
+    console.log(o);
+    if (o != null) {
+      return true;
+    }
+
+    return false;
+  }
+  EsMedico(): boolean {
+    var Info = this.Almacenamiento.ObtenerInformacionLS("Tipo");
+
+    var o = JSON.parse(Info);
+    if (o.TipoUsuario == 'Medico') {
+      return true;
+    }
+    return false;
+  }
+
+  ActualizarHematologias() {
+    console.log("HEMATOLOGIAS");
+    this.Hematologias = [];
+    var Info = this.Almacenamiento.ObtenerInformacionLS("Usuario");
+    var o = JSON.parse(Info);
+    this.CodigoUsuarioH = o.user;
+    this.Microservicio.ObtenerHematologiasTotales(this.CodigoUsuarioH).subscribe((resp: any) => {
+      console.log("resp->" + resp)
+      if (resp.msg == true) {
+        const reversed = resp.info.reverse();
+        for (let MensajeRecibido of reversed) {
+          var unidadFinal:string = "";
+          if (MensajeRecibido.Nombre == 'ASAT-TGO' || this.Tipo == 'ALAT-TGP') {
+            console.log("ASSST")
+            unidadFinal = "UI/L"
+
+          } else if (MensajeRecibido.Nombre == 'HEMOGLOBINA GLICOSILADA') {
+            console.log("Hemoglovina")
+            unidadFinal = "%"
+          } else {
+            unidadFinal = "mg/dl"
+          }
+          this.Hematologias.push({
+            "Nombre": MensajeRecibido.Nombre,
+            "Cantidad": MensajeRecibido.Cantidad,
+            "Unidad": unidadFinal,
+            "Fecha": MensajeRecibido.Fecha_Registro.substring(0, 10)
+          });
+
+        }
+      }
+    });
+  }
+  ObtenerNombreHematologias() {
+    console.log("HEMATOLOGIAS");
+    this.TipoHemalogias = [];
+   
+    this.Microservicio.ObtenerNombreHematologias().subscribe((resp: any) => {
+      console.log("resp->" + resp)
+      if (resp.msg == true) {
+        const reversed = resp.info.reverse();
+        for (let MensajeRecibido of reversed) {
+         
+          this.TipoHemalogias.push({
+            "Nombre": MensajeRecibido.Nombre
+          });
+
+        }
+      }
+    });
+  }
+
+  Buscar(){
+    console.log("HEMATOLOGIAS a buscar BUSCANDO XD");
+    console.log("HEMATOLOGIAS a buscar BUSCANDO XD->" + this.HematologiABuscar);
+    console.log("HEMATOLOGIAS a buscar BUSCANDO XD->" + this.FechaInicio);
+    console.log("HEMATOLOGIAS a buscar BUSCANDO XD->" + this.FechaFinal);
+    var Fecha1 = new Date(this.FechaInicio);
+    var Fecha2 = new Date(this.FechaFinal);
+    console.log("HEMATOLOGIAS a buscar BUSCANDO XD->" + Fecha1);
+    console.log("HEMATOLOGIAS a buscar BUSCANDO XD->" + Fecha2);
+    this.Hematologias = [];
+    var Info = this.Almacenamiento.ObtenerInformacionLS("Usuario");
+    var o = JSON.parse(Info);
+    this.CodigoUsuarioH = o.user;
+    this.Microservicio.IdHematologa(this.HematologiABuscar).subscribe((resp: any) => {
+      if (resp.msg == true) {
+        this.codigoHematologia = resp.info[0].Internal_ID_Hematologia;
+        console.log("HEMATOLOGIAS a buscar BUSCANDFO XD->" + this.codigoHematologia);
+        if(Fecha1>Fecha2){
+          this.Alamars.Mensaje_De_Error("Datos incorrectos", "La fecha final debe ser superior o igual a la fecha de inicio");
+          
+        }else{
+          this.Microservicio.verHematologias(this.CodigoUsuarioH,this.codigoHematologia,this.FechaInicio,this.FechaFinal).subscribe((resp: any) => {
+            if (resp.msg == true) { 
+              const reversed = resp.info.reverse();
+              for (let MensajeRecibido of reversed) {
+                var unidadFinal:string = "";
+                if (MensajeRecibido.Nombre == 'ASAT-TGO' || this.Tipo == 'ALAT-TGP') {
+                  console.log("ASSST")
+                  unidadFinal = "UI/L"
+      
+                } else if (MensajeRecibido.Nombre == 'HEMOGLOBINA GLICOSILADA') {
+                  console.log("Hemoglovina")
+                  unidadFinal = "%"
+                } else {
+                  unidadFinal = "mg/dl"
+                }
+                this.Hematologias.push({
+                  "Nombre": this.HematologiABuscar,
+                  "Cantidad": MensajeRecibido.Cantidad,
+                  "Unidad": unidadFinal,
+                  "Fecha": MensajeRecibido.Fecha_Registro.substring(0, 10)
+                });
+      
+              }
+            }else{
+              this.Hematologias.push({
+                "Nombre": "REGISTROS NO ENCONTRADOS",
+                "Cantidad": "0",
+                "Unidad": "--",
+                "Fecha": "--"
+              });
+            }
+          });
+        }
+        
+      } else {
+        this.Alamars.Mensaje_De_Error("Datos incorrectos", "La hematología " + this.HematologiABuscar + " no existe en nuestro sistema");
+
+      }
+    });
+    /*
+    this.Microservicio.ObtenerHematologiasTotales(this.CodigoUsuarioH).subscribe((resp: any) => {
+      console.log("resp->" + resp)
+      if (resp.msg == true) {
+        const reversed = resp.info.reverse();
+        for (let MensajeRecibido of reversed) {
+          var unidadFinal:string = "";
+          if (MensajeRecibido.Nombre == 'ASAT-TGO' || this.Tipo == 'ALAT-TGP') {
+            console.log("ASSST")
+            unidadFinal = "UI/L"
+
+          } else if (MensajeRecibido.Nombre == 'HEMOGLOBINA GLICOSILADA') {
+            console.log("Hemoglovina")
+            unidadFinal = "%"
+          } else {
+            unidadFinal = "mg/dl"
+          }
+          this.Hematologias.push({
+            "Nombre": MensajeRecibido.Nombre,
+            "Cantidad": MensajeRecibido.Cantidad,
+            "Unidad": unidadFinal,
+            "Fecha": MensajeRecibido.Fecha_Registro.substring(0, 10)
+          });
+
+        }
+      }
+    });
+    */
   }
 }

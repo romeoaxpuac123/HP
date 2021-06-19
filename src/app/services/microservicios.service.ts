@@ -8,6 +8,7 @@ import {tap} from 'rxjs/operators';
 })
 export class MicroserviciosService {
   private _refresh$ = new Subject<void>();
+  private _refresh2$ = new Subject<void>();
   constructor(
     private _http:HttpClient, 
   ){ 
@@ -15,6 +16,9 @@ export class MicroserviciosService {
   }
   get refresh$(){
     return this._refresh$;
+  }
+  get refresh2$(){
+    return this._refresh2$;
   }
   SesionCliente(correo:string,password:string){
     
@@ -240,6 +244,48 @@ export class MicroserviciosService {
       "Email": Email
     })
   }
+  IdHematologa(Nombre:string){
+    let urlAPI = 'http://localhost:5003/idHematologia';
+    return this._http.post(urlAPI,{
+      "Nombre": Nombre
+    })
+  }
+  RegistrarHematologa(Internal_ID_Hematologia:number,External_ID_Cliente:number,Cantidad:number,Fecha_Registro:string)
+  :Observable<any>{
+    let urlAPI = 'http://localhost:5003/RegistrarHematologia';
+    return this._http.post(urlAPI,{
+      "Internal_ID_Hematologia": Internal_ID_Hematologia,
+      "External_ID_Cliente": External_ID_Cliente,
+      "Cantidad": Cantidad,
+      "Fecha_Registro": Fecha_Registro
+    }).pipe(
+      tap(()=>{
+        this._refresh2$.next();
+      })
+    )
+  }
 
+  ObtenerHematologiasTotales(External_ID_Cliente:number){
+    let urlAPI = 'http://localhost:5003/MostrarHematologias';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente
+    })
+  }
 
+  ObtenerNombreHematologias(){
+    let urlAPI = 'http://localhost:5003/Hematologias';
+    return this._http.post(urlAPI,{
+      "Nombre":"Nombre"
+    })
+  }
+
+  verHematologias(External_ID_Cliente:number,Internal_ID_Hematologia:number,Fecha_Registro:string,Fecha_Registro2:string){
+    let urlAPI = 'http://localhost:5003/BuscarHematologia';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente,
+      "Internal_ID_Hematologia":Internal_ID_Hematologia,
+      "Fecha_Registro": Fecha_Registro,
+      "Fecha_Registro2":Fecha_Registro2
+    })
+  }
 }

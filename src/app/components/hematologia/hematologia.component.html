@@ -14,22 +14,23 @@
         <button (click)="EnviarHematologia()" id="boton_personalizado">Registrar Hematología</button>
     </div>
     <br><br><br>
+    <h1>Tus Hematologías</h1>
     <div class="Buscar">
         <label id="lBusqueda" for="FechaInicio">Hematología</label>
-        <select name="Tipo" id="Tipo">
-            <option [value]="item" *ngFor="let item of TipoHemalogias ;">{{item.Nombre}}</option>                   
+        <select [(ngModel)]="HematologiABuscar" name="Tipo" id="Tipo">
+            <option [ngValue]="item.Nombre" *ngFor="let item of TipoHemalogias ;">{{item.Nombre}}</option>                   
         </select>
         <br><br>
 
         <label id="linicio" for="FechaInicio">Fecha Inicio</label>
         <br>
-        <input id="FechaInicio" type="date" name="Inicio">
+        <input [(ngModel)]="FechaInicio" id="FechaInicio" type="date" name="Inicio">
         <br><br>
         <label id="lfinal" for="FechaFin">Fecha Final</label>
         <br>
-        <input id="FechaFin" type="date" name="Fin">
+        <input [(ngModel)]="FechaFinal" id="FechaFin" type="date" name="Fin">
         <br><br>
-        <button id="boton_personalizado">Buscar</button>
+        <button (click)="Buscar()" id="boton_personalizado">Buscar</button>
     </div>
     <br>
     <table flex="20" id="racetimes">
