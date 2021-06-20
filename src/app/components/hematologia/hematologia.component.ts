@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertasComponent } from '../alertas/alertas.component';
 import Swal from 'sweetalert2';
 import { MicroserviciosService } from '../../services/microservicios.service';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './hematologia.component.html',
   styleUrls: ['./hematologia.component.css']
 })
-export class HematologiaComponent implements OnInit {
+export class HematologiaComponent implements OnInit, OnDestroy {
   public Alamars: AlertasComponent = new AlertasComponent;
   public subscription: Subscription = new Subscription();
   public Pagina: number = 1;
@@ -41,7 +41,10 @@ export class HematologiaComponent implements OnInit {
 
    
   }
-
+  ngOnDestroy():void{
+    this.subscription.unsubscribe();
+    console.log("Observable cerrado");
+}
   ngOnInit(): void {
     this.OnnSesion = this.SesionOnn();
     if (this.OnnSesion == false) {

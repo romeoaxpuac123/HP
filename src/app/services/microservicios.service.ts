@@ -288,4 +288,82 @@ export class MicroserviciosService {
       "Fecha_Registro2":Fecha_Registro2
     })
   }
+
+  IdHematologaReporte(Nombre:string){
+    let urlAPI = 'http://localhost:8003/idHematologia';
+    return this._http.post(urlAPI,{
+      "Nombre": Nombre
+    })
+  }
+
+
+  verHematologiasReportes(External_ID_Cliente:number,Internal_ID_Hematologia:number,Fecha_Registro:string,Fecha_Registro2:string){
+    let urlAPI = 'http://localhost:8003/BuscarHematologia';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente,
+      "Internal_ID_Hematologia":Internal_ID_Hematologia,
+      "Fecha_Registro": Fecha_Registro,
+      "Fecha_Registro2":Fecha_Registro2
+    })
+  }
+
+  ObtenerNombreHematologiasReportes(){
+    let urlAPI = 'http://localhost:8003/Hematologias';
+    return this._http.post(urlAPI,{
+      "Nombre":"Nombre"
+    })
+  }
+
+  ObtenerPrePost(External_ID_Cliente:number,Fecha_Registro:string,Fecha_Registro2:string){
+    let urlAPI = 'http://localhost:8003/BuscarPrePost';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente,
+      "Fecha_Registro": Fecha_Registro,
+      "Fecha_Registro2":Fecha_Registro2
+    })
+  }
+  ObtenerTotalGlucosa(External_ID_Cliente:number,Fecha_Registro:string,Fecha_Registro2:string){
+    let urlAPI = 'http://localhost:8003/TotalGlucosa';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente,
+      "Fecha_Registro": Fecha_Registro,
+      "Fecha_Registro2":Fecha_Registro2
+    })
+  }
+
+  ObtenerDosColesterol(External_ID_Cliente:number,Fecha_Registro:string,Fecha_Registro2:string){
+    let urlAPI = 'http://localhost:8003/BuscarColesterol';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente,
+      "Fecha_Registro": Fecha_Registro,
+      "Fecha_Registro2":Fecha_Registro2
+    })
+  }
+  verHematologiasReportes2(External_ID_Cliente:number,Internal_ID_Hematologia:number){
+    let urlAPI = 'http://localhost:8003/BuscarHematologia2';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente,
+      "Internal_ID_Hematologia":Internal_ID_Hematologia
+    })
+  }
+  ObtenerPrePost2(External_ID_Cliente:number){
+    let urlAPI = 'http://localhost:8003/BuscarPrePost2';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente
+    })
+  }
+  ObtenerTotalGlucosa2(External_ID_Cliente:number){
+    let urlAPI = 'http://localhost:8003/TotalGlucosa2';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente
+    })
+  }
+  ObtenerDosColesterol2(External_ID_Cliente:number){
+    let urlAPI = 'http://localhost:8003/BuscarColesterol2';
+    return this._http.post(urlAPI,{
+      "External_ID_Cliente": External_ID_Cliente
+    })
+  }
+ 
+
 }

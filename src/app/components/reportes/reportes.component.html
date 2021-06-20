@@ -11,18 +11,18 @@
         <br>
         <label id="lBusqueda" for="FechaInicio">Hematología</label>
         <br>
-        <select name="Tipo" id="Tipo">
-        <option [value]="item" *ngFor="let item of TipoHemalogias ;">{{item.Nombre}}</option>
+        <select [(ngModel)]="HematologiABuscarGENERAL" name="Tipo" id="Tipo">
+        <option [ngValue]="item.Nombre" *ngFor="let item of TipoHemalogias ;">{{item.Nombre}}</option>
     </select>
         <br><br>
 
         <label id="linicio" for="FechaInicio">Fecha Inicio</label>
         <br>
-        <input id="FechaInicio" type="date" name="Inicio">
+        <input [(ngModel)]="FechaInicioGENERAL" id="LFechaInicio" type="date" name="Inicio">
         <br><br>
         <label id="lfinal" for="FechaFin">Fecha Final</label>
         <br>
-        <input id="FechaFin" type="date" name="Fin">
+        <input [(ngModel)]="FechaFinalGENERAL" id="LFechaFin" type="date" name="Fin">
         <br>
         <button (click)="VerReporteIndividual()" id="boton_personalizado">Buscar</button>
         <br>
@@ -42,9 +42,13 @@
         <div class="BuscarPorRangos">
             <label id="lBusqueda" for="Titulo">Rango de Busqueda</label>
             <br>
-            <select name="Rango" id="Rango">
-            <option [value]="item2" *ngFor="let item2 of RangoDeFechas ;">{{item2}}</option>
-        </select>
+            <label id="linicio" for="FechaInicio">Fecha Inicio</label>
+            <br>
+            <input [(ngModel)]="FechaInicio" id="FechaInicio" type="date" name="Inicio">
+            <br><br>
+            <label id="lfinal" for="FechaFin">Fecha Final</label>
+            <br>
+            <input [(ngModel)]="FechaFinal" id="FechaFin" type="date" name="Fin">
             <br>
             <br>
             <button (click)="ActualizarReprotes()" id="boton_personalizado">Actualizar Reportes</button>
